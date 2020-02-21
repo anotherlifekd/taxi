@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit order status</title>
+    </head>
+    <body>
+
+        <table border="2" style="width: 100%; margin-bottom: 30px;">
+            <tr>
+                <td>Client name</td>
+                <td>Phone</td>
+                <td>Order address</td>
+                <td>Distination address</td>
+                <td>Desired time</td>
+                <td>Status</td>
+            </tr>
+            <tr style="margin-bottom: 10px;">
+                <td>{{ order.client_name }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.order_address }}</td>
+                <td>{{ order.distination_address }}</td>
+                <td>{{ order.desired_time }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Save">
+                        <button onclick="location.href='http://127.0.0.1:8000/profile'" type="button">Orders</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

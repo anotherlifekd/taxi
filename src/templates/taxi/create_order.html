@@ -1,0 +1,17 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create New Order</title>
+    </head>
+    <body>
+
+        <h1 class="main">Order Form:</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="OK">
+        </form>
+
+    </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ user.username }}
+        {{ user.email }}
+        {{ user.first_name }}
+        {{ user.last_name }}
+        {{ user.drivers.license_plate_number }}
+
+
+        {% for order in orders %}
+        <table border="2" style="width: 100%; margin-bottom: 30px;">
+            <tr>
+                <td>Client name</td>
+                <td>Phone</td>
+                <td>Order address</td>
+                <td>Distination address</td>
+                <td>Desired time</td>
+                <td>Status</td>
+            </tr>
+            <tr style="margin-bottom: 10px;">
+                <td>{{ order.client_name }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.order_address }}</td>
+                <td>{{ order.distination_address }}</td>
+                <td>{{ order.desired_time }}</td>
+                <td>{{ order.status }}</td>
+                <td><button onclick="location.href='http://127.0.0.1:8000/order-status/{{ order.id }}'" type="button">Edit status</button></td>
+            </tr>
+        </table>
+        {% endfor %}
+
+
+        <div>
+            {% if orders.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ orders.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% for num in orders.paginator.page_range %}
+
+            {% if orders.number == num %}
+            <span>{{ num }}</span>
+            {% elif num > orders.number|add:'-3' and num < orders.number|add:'3' %}
+            {% endif %}
+
+            {% endfor %}
+
+            {% if orders.has_next %}
+                <a href="?page={{ orders.next_page_number }}">Next</a>
+                <a href="?page={{ orders.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        </div>
+{% endblock %}
